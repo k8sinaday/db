@@ -1,0 +1,17 @@
+version: "3.5"
+services:
+  mongodb:
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_DATABASE: k8sinaday # name of the first database
+    image: mongo:4.2.2
+    networks:
+      - k8sinaday
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./init_data.js:/docker-entrypoint-initdb.d/init_data.js # mount init_data.js in this repo to where init scripts are ran by default in the container
+    
+networks:
+  k8sinaday:
+    name: k8sinaday
